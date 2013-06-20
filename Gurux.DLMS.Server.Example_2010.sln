@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gurux.DLMS.Server.Example_2010", "Gurux.DLMS.Server.Example\Gurux.DLMS.Server.Example_2010.csproj", "{60FE2A68-A783-4F3F-B034-2657E9718F66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gurux.DLMS_2010", "..\Gurux.DLMS\Development\Gurux.DLMS_2010.csproj", "{EFD71BFF-AD54-45ED-B473-305813C2F83A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gurux.DLMS_2010", "..\Gurux.DLMS.Net\Development\Gurux.DLMS_2010.csproj", "{EFD71BFF-AD54-45ED-B473-305813C2F83A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gurux.Net_2010", "..\..\GXMedias\Gurux.Net\Development\Gurux.Net_2010.csproj", "{CB63EA09-D6BC-4B1D-927E-83041A222D54}"
 EndProject

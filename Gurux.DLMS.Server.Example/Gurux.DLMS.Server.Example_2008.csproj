@@ -62,7 +62,7 @@
       <Project>{CB63EA09-D6BC-4B1D-927E-83041A222D54}</Project>
       <Name>Gurux.Net_2008</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Gurux.DLMS\Development\Gurux.DLMS_2008.csproj">
+    <ProjectReference Include="..\..\Gurux.DLMS.Net\Development\Gurux.DLMS_2008.csproj">
       <Project>{EFD71BFF-AD54-45ED-B473-305813C2F83A}</Project>
       <Name>Gurux.DLMS_2008</Name>
     </ProjectReference>
