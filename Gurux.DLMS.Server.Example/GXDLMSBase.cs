@@ -154,9 +154,7 @@ namespace GuruxDLMSServerExample
             //Add Register Monitor object.
             GXDLMSRegisterMonitor rm = new GXDLMSRegisterMonitor();
             rm.LogicalName = "0.0.1.0.0.255";
-            rm.Thresholds = null;
-            rm.MonitoredValue = null;
-            rm.Actions = null;
+            rm.MonitoredValue.Update(r, 2);
             Items.Add(rm);
             
             ///////////////////////////////////////////////////////////////////////
@@ -183,15 +181,19 @@ namespace GuruxDLMSServerExample
             aa.ListeningWindow.Add(new GXDateTime(-1, -1, -1, 6, -1, -1, -1), new GXDateTime(-1, -1, -1, 8, -1, -1, -1));
             aa.Status = AutoAnswerStatus.Inactive;
             aa.NumberOfCalls = 0;
-            aa.NumberOfRings = 1;
+            aa.NumberOfRingsInListeningWindow = 1;
+            aa.NumberOfRingsOutListeningWindow = 2;
             Items.Add(aa);
 
             ///////////////////////////////////////////////////////////////////////
             //Add Modem Configuration object.
             GXDLMSModemConfiguration mc = new GXDLMSModemConfiguration();
             mc.CommunicationSpeed = BaudRate.Baudrate57600;
-            mc.InitialisationStrings = null;
-            mc.ModemProfile = null;
+            GXDLMSModemInitialisation init = new GXDLMSModemInitialisation();
+            init.Request = "AT";
+            init.Response = "OK";
+            init.Delay = 0;
+            mc.InitialisationStrings = new GXDLMSModemInitialisation[] { init };
             Items.Add(mc);
 
             ///////////////////////////////////////////////////////////////////////
@@ -235,6 +237,12 @@ namespace GuruxDLMSServerExample
             {
                 //Implement spesific clock handling here.
                 //Otherwice initial values are used.                
+            }
+            else if (e.Target is GXDLMSRegisterMonitor && e.Index == 2)
+            {
+                //Update Register Monitor Thresholds values.
+                e.Value = new object[]{new Random().Next(0, 1000)};
+                e.Handled = true;
             }
             else 
             {
