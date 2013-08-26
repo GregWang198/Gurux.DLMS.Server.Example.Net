@@ -82,7 +82,6 @@ namespace GuruxDLMSServerExample
             //Add Tcp Udp setup. Default Logical Name is 0.0.25.0.0.255.
             GXDLMSTcpUdpSetup tcp = new GXDLMSTcpUdpSetup();
             Items.Add(tcp);
-
             ///////////////////////////////////////////////////////////////////////
             //Add Load profile.
             GXDLMSProfileGeneric pg = new GXDLMSProfileGeneric("1.0.99.1.0.255");
@@ -100,6 +99,8 @@ namespace GuruxDLMSServerExample
             r.SelectedAttributeIndex = 2;
             pg.CaptureObjects.Add(r);
             Items.Add(pg);
+            //Add initial rows.
+            pg.Buffer.Add(new object[] { DateTime.Now, (int)10 });
             ///////////////////////////////////////////////////////////////////////
             //Add Auto connect object.
             GXDLMSAutoConnect ac = new GXDLMSAutoConnect();
@@ -107,7 +108,7 @@ namespace GuruxDLMSServerExample
             ac.Repetitions = 10;
             ac.RepetitionDelay = 60;
             //Calling is allowed between 1am to 6am.
-            ac.CallingWindow.Add(new GXDateTime(-1, -1, -1, 1, 0, 0, -1), new GXDateTime(-1, -1, -1, 6, 0, 0, -1));
+            ac.CallingWindow.Add(new KeyValuePair<GXDateTime, GXDateTime>(new GXDateTime(-1, -1, -1, 1, 0, 0, -1), new GXDateTime(-1, -1, -1, 6, 0, 0, -1)));
             ac.Destinations = new string[] { "www.gurux.org"};
             Items.Add(ac);
 
@@ -170,15 +171,15 @@ namespace GuruxDLMSServerExample
             ///////////////////////////////////////////////////////////////////////
             //Add SAP Assignment object.
             GXDLMSSapAssignment sap = new GXDLMSSapAssignment();
-            sap.SapAssignmentList.Add(1, "Gurux");
-            sap.SapAssignmentList.Add(16, "Gurux-2");
+            sap.SapAssignmentList.Add(new KeyValuePair<UInt16, string>(1, "Gurux"));
+            sap.SapAssignmentList.Add(new KeyValuePair<UInt16, string>(16, "Gurux-2"));
             Items.Add(sap);
 
             ///////////////////////////////////////////////////////////////////////
             //Add Auto Answer object.
             GXDLMSAutoAnswer aa = new GXDLMSAutoAnswer();
             aa.Mode = AutoConnectMode.EmailSending;
-            aa.ListeningWindow.Add(new GXDateTime(-1, -1, -1, 6, -1, -1, -1), new GXDateTime(-1, -1, -1, 8, -1, -1, -1));
+            aa.ListeningWindow.Add(new KeyValuePair<GXDateTime, GXDateTime>(new GXDateTime(-1, -1, -1, 6, -1, -1, -1), new GXDateTime(-1, -1, -1, 8, -1, -1, -1)));
             aa.Status = AutoAnswerStatus.Inactive;
             aa.NumberOfCalls = 0;
             aa.NumberOfRingsInListeningWindow = 1;
@@ -200,15 +201,10 @@ namespace GuruxDLMSServerExample
             //Add Mac Address Setup object.
             GXDLMSMacAddressSetup mac = new GXDLMSMacAddressSetup();
             mac.MacAddress = "00:11:22:33:44:55:66";
-            Items.Add(mac);
-
+            Items.Add(mac);            
             ///////////////////////////////////////////////////////////////////////
             //Server must initialize after all objects are added.
             Initialize();
-            //Add rows after Initialize.
-            pg.Buffer.Columns[0].DataType = typeof(DateTime);
-            pg.Buffer.Columns[1].DataType = typeof(int);
-            pg.Buffer.Rows.Add(new object[] { DateTime.Now, (int)10 });
         }        
 
         /// <summary>
