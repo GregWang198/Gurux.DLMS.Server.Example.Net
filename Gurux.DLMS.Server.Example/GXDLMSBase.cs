@@ -63,6 +63,7 @@ namespace GuruxDLMSServerExample
             Media.OnReceived += new Gurux.Common.ReceivedEventHandler(OnReceived);
             Media.OnClientConnected += new Gurux.Common.ClientConnectedEventHandler(OnClientConnected);
             Media.OnClientDisconnected += new Gurux.Common.ClientDisconnectedEventHandler(OnClientDisconnected);
+            Media.OnError += new Gurux.Common.ErrorEventHandler(OnError);
             Media.Open();
             ///////////////////////////////////////////////////////////////////////
             //Add Logical Device Name. 123456 is meter serial number.
@@ -205,6 +206,11 @@ namespace GuruxDLMSServerExample
             ///////////////////////////////////////////////////////////////////////
             //Server must initialize after all objects are added.
             Initialize();
+        }
+
+        void OnError(object sender, Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex.Message);
         }        
 
         /// <summary>
@@ -267,10 +273,6 @@ namespace GuruxDLMSServerExample
         }
 
         public override void Write(ValueEventArgs e)
-        {
-        }
-
-        public override void UpdateItems()
         {
         }
 
