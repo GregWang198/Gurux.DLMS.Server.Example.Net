@@ -48,10 +48,10 @@ public void Initialize(int port) throws IOException
     ///////////////////////////////////////////////////////////////////////
     //Add Logical Device Name. 123456 is meter serial number.
     GXDLMSData d = new GXDLMSData("0.0.42.0.0.255");
-    d.setValue("Gurux123456");
+    d.Value = "Gurux123456";
     //Set access right. Client can't change Device name.
-    d.setAccess(2, AccessMode.READ);
-    getItems().add(d);
+    d.SetAccess(2, AccessMode.READ);
+    Items.Add(d);
 }
 
 ```
@@ -60,7 +60,7 @@ Read method is called when client wants to read some data from the meter.
 If you want that framework returns current value just set Handled = false. 
 Otherwice you can just set value that you want to return. 
 In this example we will return current time for the clock.
-Otherewice we will return object attribute value.
+Otherwise we will return attribute value of the object.
 
 ```c#
 
@@ -83,7 +83,7 @@ public override void Read(ValueEventArgs e)
 ```
 
 Write method is called when client wants to write some data to the meter.
-You can handle write by you self or let the framework handle it.
+You can handle write by yourself or let the framework handle it.
 
 ```c#
 
@@ -94,7 +94,7 @@ public override void Write(ValueEventArgs e)
 ```
 
 Action method is called when client performs action like reset.
-You can handle actions by you self or let the framework handle it.
+You can handle actions by yourself or let the framework handle it.
 
 ```c#
 
