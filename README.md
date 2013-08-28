@@ -6,7 +6,7 @@ Gurux.DLMS library for Java is a high-performance Java component that helps you 
 
 We have try to make component so easy to use that you do not need understand protocol at all.
 
-For more info check out [Gurux](http://www.gurux.org/ "Gurux").
+For more info check out [Gurux.DLMS](http://www.gurux.fi/index.php?q=Gurux.DLMS "Gurux.DLMS").
 
 We are updating documentation on Gurux web page. 
 
@@ -16,8 +16,7 @@ DLMS/COSEM [meter/simulator/proxy](http://www.gurux.org/index.php?q=OwnDLMSMeter
 If you have problems you can ask your questions in Gurux [Forum](http://www.gurux.org/forum).
 
 You do not nesessary need to use Gurux media component like Gurux.Net. 
-You can use any connection library you want to.
-Gurux.DLMS classes only parse the data.
+You can use any connection library you want to. Gurux.DLMS classes only parse the data.
 
 
 Simple example
