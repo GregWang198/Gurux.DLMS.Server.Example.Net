@@ -71,6 +71,8 @@ namespace GuruxDLMSServerExample
             d.Value = "Gurux123456";
             //Set access right. Client can't change Device name.
             d.SetAccess(2, AccessMode.Read);
+            //Value is get as Octet String.
+            d.SetDataType(2, DataType.OctetString);
             Items.Add(d);
             //Add Last avarage.
             GXDLMSRegister r = new GXDLMSRegister("1.1.21.25.0.255");
@@ -79,6 +81,9 @@ namespace GuruxDLMSServerExample
             Items.Add(r);
             //Add default clock. Clock's Logical Name is 0.0.1.0.0.255.
             GXDLMSClock clock = new GXDLMSClock();
+            clock.Begin = new GXDateTime(-1, 9, 1, -1, -1, -1, -1);
+            clock.End = new GXDateTime(-1, 3, 1, -1, -1, -1, -1);
+            clock.Deviation = 0;
             Items.Add(clock);
             //Add Tcp Udp setup. Default Logical Name is 0.0.25.0.0.255.
             GXDLMSTcpUdpSetup tcp = new GXDLMSTcpUdpSetup();
@@ -156,6 +161,13 @@ namespace GuruxDLMSServerExample
             //Add Register Monitor object.
             GXDLMSRegisterMonitor rm = new GXDLMSRegisterMonitor();
             rm.LogicalName = "0.0.1.0.0.255";
+            rm.Thresholds = new object[] { (int)0x1234, (int)0x5678 };
+            GXDLMSActionSet set = new GXDLMSActionSet();
+            set.ActionDown.LogicalName = rm.LogicalName;
+            set.ActionDown.ScriptSelector = 1;
+            set.ActionUp.LogicalName = rm.LogicalName;
+            set.ActionUp.ScriptSelector = 2;            
+            rm.Actions = new GXDLMSActionSet[] {set };
             rm.MonitoredValue.Update(r, 2);
             Items.Add(rm);
             
